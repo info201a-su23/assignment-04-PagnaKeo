@@ -1,71 +1,249 @@
 ---
-title: "A3: Incarceration"
+title: "A4: Incarceration"
 output: html_document
 ---
 
 ### Introduction
+Currently the United States holds the unfortunate distinction of having the highest incarceration rate in the world, with a significant portion of its population behind bars. Particularly concerning is the over representation of people of color, especially Black individuals, in the criminal justice system. This disparity in incarceration rates is a troubling reflection of both historical and current-day racism that continues to shape the American society. In this introduction, we highlight the urgent need to address these issues and take a deeper dive into prison population here in Washington State, and its counties. This data set will give a more presentable scale of the people incarcerated here in the Washington; diving deep into the make up of the prison population here in Washington.  
 
-An introduction of the problem domain and a description of the variable(s) you are choosing to analyze (and why!)
 
 ### Summary Information
+The data values I calculated for was the average total prison population of each county in Washington State, and the averages for each ethnicity group in each of the county prison. There are 6 different values I  calculated for, one being the total prison average in each county, and the 5 others are based on the ethnicity and their averages in each county prison. The county with the highest average number of prison population was Lewis county with an average rate of 860.61, and the lowest being Whitman county with an average rate of 71.64. From my finding using the averages of each county and ethnicity, among the black and native population consisted the most in each county. These averages can help us understand and measure incarceration by race, giving us a better understanding of our Justice system, or analyze trends over time. This finding underscores the persistent impact of historical and present-day racism on the American prison and political system.The results indicated that certain regions experience disproportionately higher incarceration rates, signifying a geographical variation in the unequal treatment of racial minorities. This data can help reveal the relationship between socioeconomic factors and incarceration rates. We observed that counties with higher poverty rates tended to have higher incarceration rates, raising concerns about the interplay of social and economic inequalities with racial disparities in imprisonment
 
-Write a summary paragraph of findings that includes the 5 values calculated from your summary information R script
 
-These will likely be calculated using your DPLYR skills, answering questions such as: 
+```{r echo=FALSE}
+library(dplyr)
+url<-"https://raw.githubusercontent.com/melaniewalsh/Neat-Datasets/main/us-prison-jail-rates-1990-WA.csv"
+data <- read.csv(url)
+average_total_prison_pop <- data %>%
+  group_by(county_name) %>%
+  summarise(average_total_prison_pop = mean(total_prison_pop_rate, na.rm = TRUE)) %>%
+  arrange(average_total_prison_pop)
+print(average_total_prison_pop)
+```
+```{r echo=FALSE}
+library(dplyr)
+url<-"https://raw.githubusercontent.com/melaniewalsh/Neat-Datasets/main/us-prison-jail-rates-1990-WA.csv"
+data <- read.csv(url)
+average_black_prison_pop <- data %>%
+  group_by(county_name) %>%
+  summarise(average_black_prison_pop_county = mean(black_prison_pop_rate, na.rm = TRUE))
+print(average_black_prison_pop)
+```
+```{r echo=FALSE}
+library(dplyr)
+url<-"https://raw.githubusercontent.com/melaniewalsh/Neat-Datasets/main/us-prison-jail-rates-1990-WA.csv"
+data <- read.csv(url)
+average_white_population <- data %>%
+  group_by(county_name) %>%
+  summarise(average_white_prison_pop = mean(white_prison_pop_rate, na.rm = TRUE))
+print(average_white_population)
+```
+```{r echo=FALSE}
+library(dplyr)
+url<-"https://raw.githubusercontent.com/melaniewalsh/Neat-Datasets/main/us-prison-jail-rates-1990-WA.csv"
+data <- read.csv(url)
+average_latinx_population <- data %>%
+  group_by(county_name) %>%
+  summarise(average_latinx_prison_pop = mean(latinx_prison_pop_rate, na.rm = TRUE))
+print(average_latinx_population)
+```
+```{r echo=FALSE}
+library(dplyr)
+url<-"https://raw.githubusercontent.com/melaniewalsh/Neat-Datasets/main/us-prison-jail-rates-1990-WA.csv"
+data <- read.csv(url)
+average_native_population <- data %>%
+  group_by(county_name) %>%
+  summarise(average_native_prison_pop = mean(native_prison_pop_rate, na.rm = TRUE))
+print(average_native_population)
+```
+```{r echo=FALSE}
+library(dplyr)
+url<-"https://raw.githubusercontent.com/melaniewalsh/Neat-Datasets/main/us-prison-jail-rates-1990-WA.csv"
+data <- read.csv(url)
+average_aapi_population <- data %>%
+  group_by(county_name) %>%
+  summarise(average_aapi_prison_pop = mean(aapi_prison_pop_rate, na.rm = TRUE))
+print(average_aapi_population)
+```
 
-- What is the average value of my variable across all the counties (in the current year)?
-- Where is my variable the highest / lowest?
-- How much has my variable change over the last N years?
 
-Feel free to calculate and report values that you find relevant. Again, remember that the purpose is to think about how these measure of incarceration vary by race.
 
 ### The Dataset
 
 Who collected the data?  
+
+Vera Institute of Justice  
+
 How was the data collected or generated?  
+
+It was complied together by the Vera Institute, collecting data that was already collected from different sources. The U.S. Department of Justice Bureau of Justice Statistics (BJS) gathers data from all jails and prisons every 5-8 years.
+
 Why was the data collected?  
+
+The data was collected to showcase and expose patterns or trends of inequality regarding incarceration here in the US and all across the states. It is meant to provide an statically analysis on inequality among certain ethnicity groups and determine the underlying cause. 
+
 How many observations (rows) are in your data?  
-How many features (columns) are in the data?  
+
+There are 1131 observation or rows in this data.
+
+How many features (columns) are in the data?
+
+There are 23 features or columns in this data.
+
 What, if any, ethical questions or questions of power do you need to consider when working with this data?  
-What are possible limitations or problems with this data?   (at least 200 words)
+
+When working with this data, it's important to consider who or what has a significant influence on policies and laws. It's also crucial to think about the narrative that can be derived from the data and how we are using it. Beyond the numbers and statistics, there are questions about privacy, fairness, and representation of people's voices. It's essential to examine the data's origins and investigate any potential biases that may have been introduced during collection. At the same time, we must recognize the power and influence that comes with working with this data, and acknowledge that those who generate, collect, and interpret it hold significant sway. Engaging affected communities is a critical ethical aspect, ensuring that incarcerated individuals' and advocacy groups' voices are included and respected throughout the analysis process. 
 
 
-### Trends Over Time Chart
+What are possible limitations or problems with this data? 
 
-Include a chart. Make sure to describe why you included the chart, and what patterns emerged
+The dataset we currently have only gathered data from Washington State and its counties, which limits its scope to that specific area. While it's useful to know which county has the highest average of certain ethnic groups, it only represents a fraction of the racial inequality present in the country. Different states may face varying degrees of racial inequality, and relying on just one state's data restricts the amount of information we can obtain. A more comprehensive dataset that covers all US states would give us a better idea of how incarceration disproportionately affects all ethnic groups nationwide. Such a dataset would clearly highlight the impact in each region of the country, and help identify areas where we can make improvements. The current dataset from Washington State and its counties has limitations that may not accurately reflect the true scale of the problem. A dataset that covers all US states and their incarceration rates would provide a more accurate depiction of the issue, and potentially present solutions to address the underlying problems. Nevertheless, the current dataset still provides a significant amount of information and sheds light on the severity of the issue in Washington State and its counties.
 
-The first chart that you will create and include will show the trend over time of your variable/topic. Think carefully about what you want to communicate to your user (you may have to find relevant trends in the dataset first!). Here are some requirements to help guide your design:
+### Trend Over Time
+```{r echo=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
 
-- Show more than one, but fewer than ~10 trends
-  - This may mean showing the same measure for different locations or different racial groups. Think carefully about a meaningful comparison of locations (e.g., the top 10 counties in a state, top 10 states, etc.)
-- You must have clear x and y axis labels
-- The chart needs a clear title 
-- You need a legend for your different line colors and a clear legend title
+url <- "https://raw.githubusercontent.com/melaniewalsh/Neat-Datasets/main/us-prison-jail-rates-1990-WA.csv"
+data <- read.csv(url)
 
-When we say "clear" or "human readable" titles and labels, that means that you should not just display the variable name.
+black_prison_pop_by_year <- data %>%
+  group_by(year) %>%
+  summarise(total_black_prison_pop = sum(black_prison_pop_rate, na.rm = TRUE))
 
-Here's an example of how to run an R script inside an RMarkdown file:
+white_prison_pop_by_year <- data %>%
+  group_by(year) %>%
+  summarise(total_white_prison_pop = sum(white_prison_pop_rate, na.rm = TRUE))
 
-``````{r, echo = FALSE, code = readLines("chart1_example.R")}
+latinx_prison_pop_by_year <- data %>%
+  group_by(year) %>%
+  summarise(total_latinx_prison_pop = sum(latinx_prison_pop_rate, na.rm = TRUE))
+
+native_prison_pop_by_year <- data %>%
+  group_by(year) %>%
+  summarise(total_native_prison_pop = sum(native_prison_pop_rate, na.rm = TRUE))
+
+aapi_prison_pop_by_year <- data %>%
+  group_by(year) %>%
+  summarise(total_aapi_prison_pop = sum(aapi_prison_pop_rate, na.rm = TRUE))
+
+all_prison_pops <- bind_cols(
+  black = black_prison_pop_by_year$total_black_prison_pop,
+  white = white_prison_pop_by_year$total_white_prison_pop,
+  latinx = latinx_prison_pop_by_year$total_latinx_prison_pop,
+  native = native_prison_pop_by_year$total_native_prison_pop,
+  aapi = aapi_prison_pop_by_year$total_aapi_prison_pop,
+  year = black_prison_pop_by_year$year
+)
+
+all_prison_pops_long <- all_prison_pops %>%
+  pivot_longer(cols = -year, names_to = "ethnicity", values_to = "total_prison_pop")
+
+trend_graph_all <- ggplot(all_prison_pops_long, aes(x = year, y = total_prison_pop, color = ethnicity)) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Trends of Prison Population Over the Years by Ethnicity",
+       x = "Year", y = "Total Prison Population") +
+  theme_minimal()
+
+print(trend_graph_all)
 ```
 
+I created a graph that displays the trend of each ethnic group's representation in the overall prison population. The data was collected from different counties in Washington State and tallied to create a sum for each ethnic group in a given year. This process was repeated for every year in the dataset, covering all ethnicities listed in the CSV file. By plotting one point for each year and connecting the dots, the graph provides a clear visualization of the changes in the prison population and emerging trends. The graph indicates that only the Latin and AAPI ethnic groups have shown a decrease in prison population over the years, while all other ethnic groups have increased. This trend can help solve various problems by providing insight into ongoing changes in the prison population over time.
+
+
 ### Variable Comparison Chart
+```{r echo=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
 
-Include a chart. Make sure to describe why you included the chart, and what patterns emerged
+average_black_prison_pop <- data %>%
+  group_by(county_name) %>%
+  summarise(average_black_prison_pop_county = mean(black_prison_pop_rate, na.rm = TRUE))
 
-The second chart that you will create and include will show how two different (continuous) variables are related to one another. Again, think carefully about what such a comparison means and what you want to communicate to your user (you may have to find relevant trends in the dataset first!). Here are some requirements to help guide your design:
+average_white_population <- data %>%
+  group_by(county_name) %>%
+  summarise(average_white_prison_pop = mean(white_prison_pop_rate, na.rm = TRUE))
 
-- You must have clear x and y axis labels
-- The chart needs a clear title 
-- If you choose to add a color encoding (not required), you need a legend for your different color and a clear legend title
+average_latinx_population <- data %>%
+  group_by(county_name) %>%
+  summarise(average_latinx_prison_pop = mean(latinx_prison_pop_rate, na.rm = TRUE))
+
+average_native_population <- data %>%
+  group_by(county_name) %>%
+  summarise(average_native_prison_pop = mean(native_prison_pop_rate, na.rm = TRUE))
+
+average_aapi_population <- data %>%
+  group_by(county_name) %>%
+  summarise(average_aapi_prison_pop = mean(aapi_prison_pop_rate, na.rm = TRUE))
+
+combined_data <- merge(average_black_prison_pop, average_white_population, by = "county_name")
+combined_data <- merge(combined_data, average_latinx_population, by = "county_name")
+combined_data <- merge(combined_data, average_native_population, by = "county_name")
+combined_data <- merge(combined_data, average_aapi_population, by = "county_name")
+
+combined_data_long <- combined_data %>%
+  gather(variable, value, -county_name)
+
+heatmap <- ggplot(combined_data_long, aes(x = county_name, y = variable, fill = value)) +
+  geom_tile() +
+  scale_fill_gradient(low = "white", high = "darkblue", name = "Population") +
+  labs(title = "Prison Population Heatmap by Ethnicity in Washington",
+       y = "Ethnicity") + 
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1))
+
+print(heatmap)
+```
+
+I created a heat map to display the average density of each ethnicity across all counties in Washington State. This map helps to visualize the differences in the density of each ethnicity in the state's prison population and shows which counties have the highest or lowest density for a particular ethnicity. The black and native prison populations are among the densest in the majority of counties, which is consistent with the data displayed in the trend graph. Although the results are consistent, the heat map provides a different visual representation of the data.
+
+
 
 ### Map
+```{r echo=FALSE}
+library(ggplot2)
+library(maps)
+library(stringr)
+library(dplyr)
 
-Include a chart. Make sure to describe why you included the chart, and what patterns emerged
+data <- read.csv("https://raw.githubusercontent.com/melaniewalsh/Neat-Datasets/main/us-prison-jail-rates-1990-WA.csv")
 
-The last chart that you will create and include will show how a variable is distributed geographically. Again, think carefully about what such a comparison means and what you want to communicate to your user (you may have to find relevant trends in the dataset first!). Here are some requirements to help guide your design:
+average_black_prison_pop <- data %>%
+  group_by(county_name) %>%
+  summarise(average_black_prison_pop_county = mean(black_prison_pop_rate, na.rm = TRUE))
 
-- Your map needs a title
-- Your color scale needs a legend with a clear label
-- Use a map based coordinate system to set the aspect ratio of your map
+wa_county_map <- map_data("county", region = "washington")
+
+county_data <- data.frame(
+  county = unique(wa_county_map$subregion),
+  value = data$black_prison_pop_rate,
+  avg_black_pop = average_black_prison_pop$average_black_prison_pop_county)
+
+combined_data <- merge(wa_county_map, county_data, by.x = "subregion", by.y = "county")
+
+county_centers <- combined_data %>%
+  group_by(subregion) %>%
+  summarise(center_long = mean(range(long)), center_lat = mean(range(lat)))
+
+heatmap2 <- ggplot() +
+  geom_polygon(data = combined_data, aes(x = long, y = lat, group = group, fill = avg_black_pop), color = "black") +
+  geom_text(data = county_centers, aes(x = center_long, y = center_lat, label = str_to_title(subregion)),
+            hjust = 0.5, vjust = 0.5, size = 2, color = "black") +
+  scale_fill_gradient(low = "white", high = "darkblue", name = "Average Black Prison Population Rate") +
+  labs(title = "Heat Map of Washington State Counties", fill = "Average Black Prison Population Rate") +
+  theme_void() +
+  coord_fixed(ratio = 1.3)
+
+print(heatmap2)
+```
+
+
+I created a heat map of Washington State based on the highest average of different ethnicity in the total prison population. As the black prison population was the highest among other ethnicity, I chose to highlight the concentration of this group across the counties of Washington State. To do this, I calculated the average black prison population for each county over a certain time period, indicating the overall average prison population for each county. The map displays which counties have the highest black prison population and their yearly average rate. Counties shown in white indicate a data set of 0, while grey counties represent data labeled as NA. The outer ring of Puget Sound counties tends to have a higher density of black prison population rate. However, the heatmap and trend analysis does not address the underlying issues that cause such a vast difference in incarceration rates among ethnicity in Washington State.
+
+
+
 
